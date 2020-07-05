@@ -1,4 +1,4 @@
-# 주관적 감상에 기반한 나만의 음악 장르 분류 (Capstone design 2020-2)
+# 주관적 감상에 기반한 나만의 음악 장르 분류 (Capstone design 2020-1)
 
 ## Overview
 * Needs, problems
