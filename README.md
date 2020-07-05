@@ -6,11 +6,11 @@
 뿐만 아니라 최근 발매된 곡들은 한 가지 장르만으로 맞아 떨어지지 않고, 여러 가지 장르가 복합적으로 어우러진 특징을 보이기 때문에 기존의 장르 체계가 절대적인 것이라 볼 수 없다고 생각했다. 때문에 나의 주관적 감상에 따라 음악을 분류한 것 또한 음악 장르 분류로 간주할 수 있다고 생각했다. 따라서 데이터 분석과 신호 처리 지식을 이용하여 이 음악들을 구분하게 하는 특징을 마이닝해보기로 했다.
 
 * Goals, objectives (evaluation)
-- 정성적: 유사도 지표와 클러스터링 기법을 바탕으로 군집화가 가장 잘 되는 특징 벡터 및 군집 분석 방법을 발굴한다.
-- 정량적: 군집 분석 모델 평가 지표에서 정확도가 60% 이상 되는 것을 목표로 한다.
+    - 정성적: 유사도 지표와 클러스터링 기법을 바탕으로 군집화가 가장 잘 되는 특징 벡터 및 군집 분석 방법을 발굴한다.
+    - 정량적: 군집 분석 모델 평가 지표에서 정확도가 60% 이상 되는 것을 목표로 한다.
 
 ## Results
-* table, graph, comparison, ...
+### Main Code
 ```
 def vector_split(v, n_split):
     v=np.array(v)
@@ -99,9 +99,14 @@ def writefile(songlist):
 - contrast: librosa.feature의 spectral_contrast 메서드를 이용해 spectral contrast 값을 7차원 벡터로 반환한다. spectral_contrast 메서드에서 기본으로 반환하는 벡터의 차원이 7차원 짜리이므로 10차원 이상의 벡터로 만들 수 없다.
 - tempogram: 우선 librosa.onset의 onset_strength 메서드를 이용해 인자로 받은 음악 데이터의 onset envelope의 numpy 배열을 만든다. 이를 short time fourier transform 처리한 뒤 이에 절댓값을 취한 것이 tempo 데이터의 벡터다.
 - writefile: 위의 함수를 이용해 추출할 수 있는 모든 피처를 새로운 csv 파일에 작성한다. 다수의 음악 데이터 처리를 위해 만든 함수다.
+<br>
+### Model Evaluation
+![image](https://user-images.githubusercontent.com/48075848/86529264-4fe12000-beea-11ea-8771-a03fe40d5b45.png)
+![image](https://user-images.githubusercontent.com/48075848/86529266-5c657880-beea-11ea-9486-e0d4a1118882.png)
+![image](https://user-images.githubusercontent.com/48075848/86529275-6d15ee80-beea-11ea-9f35-b1d28cf9334b.png)
+
 
 ## Conclusion
-* Summary, contribution, ...
 벡터 종류 관점에서도, 클러스터링 기법 관점에서도 어느 하나 눈에 띄게 좋은 결과가 없었다. 1에 가까울수록 좋은 지표들은 다 압도적으로 0에 가깝게 나왔고, 어떠한 분석 방법의 조합이든 다 분산이 너무 낮거나, 한 레이블로의 쏠림 현상이 심하게 나타났다. heroic의 경우 그나마 한 경우를 제외하곤 대체로 분산이 높게 나왔다. 모든 경우에 대해 과반 이상으로 매칭이 된 레이블이 있었다.
 따라서 제언할 수 있는 것이 없다. 다만 음악에서 느껴지는 심상, 분위기를 데이터로 추출하고 분석, 분류하는 일이 결코 만만하지 않다는 것을 깨달았다. 더 일반화하여 주관적이고 추상적인 생각을 검증, 분석 가능한 데이터로 만드는 게 매우 어려운 일임을 깨달은 바는 있다. 따라서 좀더 객관적이고 검증 가능한 주제 설정의 중요성과 필요성을 절감하게 되었다.
 <br><br>
