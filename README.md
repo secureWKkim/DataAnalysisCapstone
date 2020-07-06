@@ -1,13 +1,22 @@
 # 주관적 감상에 기반한 나만의 음악 장르 분류 (Capstone design 2020-1)
 
 ## Overview
-* Needs, problems
+* Needs, problems<br>
 발상의 시작은 나 자신의 음악 취향에 대한 오랜 관찰 결과였다. 좋아하는 곡들 사이에 일관된 특징 몇 가지가 있었고, 이 특징을 중심으로 내가 좋아하는 음악의 분류가 가능했다. 그러나 이것은 주관적, 직관적으로만 느끼는 부분에 불과했다. 명확한 실체가 없었다. 객관적, 구체적으로 어떤 수치적, 과학적 특징이 나로 하여금 그 음악들이 서로 한 유형을 공유한다고 느끼게 하는 건지 알아보고 싶었다.
 뿐만 아니라 최근 발매된 곡들은 한 가지 장르만으로 맞아 떨어지지 않고, 여러 가지 장르가 복합적으로 어우러진 특징을 보이기 때문에 기존의 장르 체계가 절대적인 것이라 볼 수 없다고 생각했다. 때문에 나의 주관적 감상에 따라 음악을 분류한 것 또한 음악 장르 분류로 간주할 수 있다고 생각했다. 따라서 데이터 분석과 신호 처리 지식을 이용하여 이 음악들을 구분하게 하는 특징을 마이닝해보기로 했다.
 
 * Goals, objectives (evaluation)
     - 정성적: 유사도 지표와 클러스터링 기법을 바탕으로 군집화가 가장 잘 되는 특징 벡터 및 군집 분석 방법을 발굴한다.
     - 정량적: 군집 분석 모델 평가 지표에서 정확도가 60% 이상 되는 것을 목표로 한다.
+
+* 활용한 도구 및 방법
+    - 구간 파악 및 설정: Wavepad Audio Editor(소프트웨어), librosa 라이브러리
+    - 음악 데이터 전처리: pydub 라이브러리, homebrew 패키지 지원 ffmpeg
+    - 음악 데이터 특징 추출: librosa 라이브러리
+    - 데이터 분석: K-means Clustering, Agglomerative Clustering, Spectral Clustering 기법 (scikit learn)
+    - 데이터 시각화: seaborn, matplotlib
+    - 군집 모델 평가: Advanced Rand Index, Fowlkes-Mallows Score, Normalized Mutual Information(NMI), Adjusted Mutual Information(AMI)
+    - 사용한 음악 데이터 목록: 맨 아래 결과 보고서 링크 참고
 
 ## Results
 ### Main Code
@@ -98,8 +107,17 @@ def writefile(songlist):
 - mel: 입력으로 받은 음악 데이터를 librosa의 stft 함수를 이용해 short time fourier transform 처리한다. 이에 절댓값을 취한 뒤, 각 값을 제곱한 값을 librosa.feature의 melspectrogram 메서드의 입력으로 넘긴다. 이를 amplitude_to_db 함수를 이용해 데시벨 단위로 바꾼 뒤 10차원 벡터로 바꿔 반환한다.
 - contrast: librosa.feature의 spectral_contrast 메서드를 이용해 spectral contrast 값을 7차원 벡터로 반환한다. spectral_contrast 메서드에서 기본으로 반환하는 벡터의 차원이 7차원 짜리이므로 10차원 이상의 벡터로 만들 수 없다.
 - tempogram: 우선 librosa.onset의 onset_strength 메서드를 이용해 인자로 받은 음악 데이터의 onset envelope의 numpy 배열을 만든다. 이를 short time fourier transform 처리한 뒤 이에 절댓값을 취한 것이 tempo 데이터의 벡터다.
-- writefile: 위의 함수를 이용해 추출할 수 있는 모든 피처를 새로운 csv 파일에 작성한다. 다수의 음악 데이터 처리를 위해 만든 함수다.
-<br>
+- writefile: 위의 함수를 이용해 추출할 수 있는 모든 피처를 새로운 csv 파일에 작성한다. 다수의 음악 데이터 처리를 위해 만든 함수다.<br>
+### Result Visualization Examples (2차원 벡터에 대한 시각화 결과)
+- K-means Clustering
+데이터를 k개의 클러스터로 나눈 뒤 할당된 클러스터의 평균과 포함된 데이터들의 거리 제곱합이 최소가 되게 한다.
+![image](https://user-images.githubusercontent.com/48075848/86555583-bb2efe80-bf8b-11ea-8fc0-c37a23631858.png)
+- Agglomerative Clustering
+계층적인 방법으로 비슷한 클러스터를 합친다.
+![image](https://user-images.githubusercontent.com/48075848/86555604-ca15b100-bf8b-11ea-881a-b5d410ae91ef.png)
+- Spectral Clustering
+클러스터를 구성하는 노드의 연결성에 기반하여 연결 그래프를 생성하고 데이터 포인트를 그룹화한다.
+![image](https://user-images.githubusercontent.com/48075848/86555665-f5989b80-bf8b-11ea-879f-5f13735ef1f1.png)
 ### Model Evaluation
 ![image](https://user-images.githubusercontent.com/48075848/86529264-4fe12000-beea-11ea-8771-a03fe40d5b45.png)
 ![image](https://user-images.githubusercontent.com/48075848/86529266-5c657880-beea-11ea-9486-e0d4a1118882.png)
