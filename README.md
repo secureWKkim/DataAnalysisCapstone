@@ -109,13 +109,13 @@ def writefile(songlist):
 - tempogram: 우선 librosa.onset의 onset_strength 메서드를 이용해 인자로 받은 음악 데이터의 onset envelope의 numpy 배열을 만든다. 이를 short time fourier transform 처리한 뒤 이에 절댓값을 취한 것이 tempo 데이터의 벡터다.
 - writefile: 위의 함수를 이용해 추출할 수 있는 모든 피처를 새로운 csv 파일에 작성한다. 다수의 음악 데이터 처리를 위해 만든 함수다.<br>
 ### Result Visualization Examples (2차원 벡터에 대한 시각화 결과)
-- K-means Clustering
+- K-means Clustering<br>
 데이터를 k개의 클러스터로 나눈 뒤 할당된 클러스터의 평균과 포함된 데이터들의 거리 제곱합이 최소가 되게 한다.
 ![image](https://user-images.githubusercontent.com/48075848/86555583-bb2efe80-bf8b-11ea-8fc0-c37a23631858.png)
-- Agglomerative Clustering
+- Agglomerative Clustering<br>
 계층적인 방법으로 비슷한 클러스터를 합친다.
 ![image](https://user-images.githubusercontent.com/48075848/86555604-ca15b100-bf8b-11ea-881a-b5d410ae91ef.png)
-- Spectral Clustering
+- Spectral Clustering<br>
 클러스터를 구성하는 노드의 연결성에 기반하여 연결 그래프를 생성하고 데이터 포인트를 그룹화한다.
 ![image](https://user-images.githubusercontent.com/48075848/86555665-f5989b80-bf8b-11ea-879f-5f13735ef1f1.png)
 ### Model Evaluation
