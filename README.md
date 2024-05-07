@@ -131,5 +131,5 @@ def writefile(songlist):
 분석 결과가 잘 나올 경우 이 프로젝트를 표준적인 장르 분류 체계가 아닌 음악의 심상, 분위기에 따라 음악을 분류하는 일의 단초로 삼고 이에 대한 데이터를 늘려 좀더 일반화된 어플리케이션으로 발전시킬 수 있다는 제언을 하고 싶다.
 
 ## Reports
-* 아이디어 전개 및 탐구 기록: https://url.kr/ba4zyf
-* 최종 발표 자료: https://docs.google.com/presentation/d/10mO6CmG-Tdpx8Uq73ryJRTtjRkP_OmO1/edit?usp=sharing&ouid=118145286936913978381&rtpof=true&sd=true
+* [아이디어 전개 및 탐구 기록](https://thewayaboutme.tistory.com/category/%EC%88%98%EC%97%85%20%ED%95%84%EA%B8%B0/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D%EC%BA%A1%EC%8A%A4%ED%86%A4%EB%94%94%EC%9E%90%EC%9D%B8)
+* [최종 발표 자료](https://docs.google.com/presentation/d/10mO6CmG-Tdpx8Uq73ryJRTtjRkP_OmO1/edit?usp=sharing&ouid=118145286936913978381&rtpof=true&sd=true)
